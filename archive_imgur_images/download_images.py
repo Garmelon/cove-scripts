@@ -17,6 +17,7 @@ def log(ids, n, id, msg):
 
 
 def download(ids, n, id, path, link):
+    tmppath = path.parent / (path.name + ".tmp")
     try:
         r = requests.get(link)
         if r.status_code == 404:
@@ -25,8 +26,9 @@ def download(ids, n, id, path, link):
         elif r.status_code != 200:
             log(ids, n, id, f"Weird status code: {r.status_code}")
             return
-        with open(path, "wb") as f:
+        with open(tmppath, "wb") as f:
             f.write(r.content)
+        tmppath.rename(path)
         log(ids, n, id, "Downloaded")
     except Exception as e:
         log(ids, n, id, f"Error fetching {link}: {e}")
