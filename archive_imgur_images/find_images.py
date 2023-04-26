@@ -18,7 +18,7 @@ instead of specifying one or more rooms directly.
 """
 
 IMAGE_RE = re.compile(r"imgur.com/([a-zA-Z0-9]+)")
-ALBUM_RE = re.compile(r"imgur.com/a/([a-zA-Z0-9]+)")
+ALBUM_RE = re.compile(r"imgur.com/(?:a|gallery)/([a-zA-Z0-9]+)")
 
 
 def main():
