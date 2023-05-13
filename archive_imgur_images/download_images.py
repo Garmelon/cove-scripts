@@ -78,7 +78,7 @@ def main():
 
     print("Downloading albums")
     for n, album_id in enumerate(album_ids):
-        album_path = args.dir / f"{album_id}.png"
+        album_path = args.dir / f"{album_id}.zip"
         album_link = f"https://imgur.com/a/{album_id}/zip"
 
         if album_path.exists():
