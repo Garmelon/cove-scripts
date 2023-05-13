@@ -42,9 +42,15 @@ def main():
     sifted = 0
     for line in sys.stdin:
         msg = json.loads(line)
+
         for match in IMAGE_RE.finditer(msg["content"]):
             image_ids.add(match.group(1))
         for match in ALBUM_RE.finditer(msg["content"]):
+            album_ids.add(match.group(1))
+
+        for match in IMAGE_RE.finditer(msg["sender"]["name"]):
+            image_ids.add(match.group(1))
+        for match in ALBUM_RE.finditer(msg["sender"]["name"]):
             album_ids.add(match.group(1))
 
         sifted += 1
