@@ -50,7 +50,13 @@ def main():
     df = pd.DataFrame({"date": dates, "count": counts})
     df.set_index("date", inplace=True)
     df = df.asfreq("D", fill_value=0)  # Fill missing dates with 0
-    df["30_day_avg"] = df["count"].rolling(window="30D", center=True).mean()
+    avg = df["count"].rolling(
+        window=30,
+        min_periods=1,
+        center=True,
+        win_type="gaussian",
+    )
+    df["30_day_avg"] = avg.mean(std=8)
 
     # Create the plot
     fig, ax = plt.subplots(figsize=(10, 5))
